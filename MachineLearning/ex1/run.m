@@ -8,7 +8,7 @@
 %  in this exericse:
 %
 %     warmUpExercise.m
-%     plotData.m
+%     plotData.m2
 %     gradientDescent.m
 %     computeCost.m
 %     gradientDescentMulti.m
@@ -26,12 +26,23 @@
 %% Initialization
 clear ; close all; clc
 
-%% ==================== Part 1: Basic Function ====================
-% Complete warmUpExercise.m 
-fprintf('Running warmUpExercise ... \n');
-fprintf('5x5 Identity Matrix: \n');
-warmUpExercise()
+data = load('ex1data1.txt');
+X = data(:, 1); y = data(:, 2);
+m = length(y); % number of training examples
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%% =================== Part 3: Gradient descent ===================
+fprintf('Running Gradient Descent ...\n')
+
+X = [ones(m, 1), data(:,1)]; % Add a column of ones to x
+theta = zeros(2, 1); % initialize fitting parameters
+
+% Some gradient descent settings
+iterations = 1500;
+alpha = 0.01;
+
+% compute and display initial cost
+computeCost(X, y, theta)
+
+% run gradient descent
+[theta, J_history] = gradientDescent(X, y, theta, alpha, iterations);
 
